@@ -20,8 +20,10 @@ module ActiveRecord
       end
 
       def through_klass
-        through = delegate_reflection.options[:through]
-        delegate_reflection.active_record.reflect_on_association(through).klass
+        @through_klass ||= begin
+          through = delegate_reflection.options[:through]
+          delegate_reflection.active_record.reflect_on_association(through).klass
+        end
       end
 
       def klass
