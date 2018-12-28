@@ -15,8 +15,9 @@ module ActiveRecord
     module ThroughReflection
 
       def initialize(delegate_reflection)
-        super
-        delegate_reflection.klass = @klass
+        super.tap do
+          delegate_reflection.klass = @klass
+        end
       end
 
       def through_klass
